@@ -24,12 +24,13 @@ def extract_and_zip_pages():
             num_pages = len(pdf.pages)
 
             for page_num in range(num_pages):
-                page = pdf.pages[page_num]
+                page = pdf.pages[page_num]  # Access the page using reader.pages[page_number]
                 pdf_writer = PyPDF2.PdfWriter()
                 pdf_writer.add_page(page)
 
                 output_file = f'page_{page_num + 1}.pdf'
-                pdf_writer.write(open(output_file, 'wb'))
+                with open(output_file, 'wb') as output_pdf:
+                    pdf_writer.write(output_pdf)
                 zipf.write(output_file)
                 os.remove(output_file)
 
